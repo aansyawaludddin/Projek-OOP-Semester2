@@ -8,6 +8,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -42,54 +44,201 @@ public class App extends Application {
         });
 
         //section
-        //ImageView ivBanner = new ImageView();
-        //ivBanner.setFitWidth(260);
-        //ivBanner.setFitHeight(300);
-        //ivBanner.setPreserveRatio(True);
+        ImageView ivBanner = new ImageView("/images/1.png");
+        ivBanner.setFitWidth(260);
+        ivBanner.setFitHeight(300);
+        ivBanner.setPreserveRatio(true);
 
         //rootNode
-        VBox rootNode = new VBox(sectionRight);
+        VBox rootNode = new VBox(ivBanner,sectionRight);
         rootNode.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(new StackPane(rootNode),640, 480);
+        Scene scene = new Scene(new StackPane(rootNode),500, 400);
 
         //atur css
         //scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         return scene;
     }
 
-    private Scene getScene2(){
+    private Scene getScene2() {
         Text tTitle = new Text("PILIH MENU OLAHRAGA");
         Button bOlahraga1 = new Button("RUNNING");
         Button bOlahraga2 = new Button("CYCLING");
         Button bOlahraga3 = new Button("SWIMMING");
-        VBox sectionRight = new VBox(tTitle, bOlahraga1, bOlahraga2, bOlahraga3);
-        sectionRight.setSpacing(50);
-        sectionRight.setAlignment(Pos.CENTER);
-        sectionRight.setPrefWidth(30);
+
+        VBox sectionRight1 = new VBox(tTitle);
+        sectionRight1.setSpacing(50);
+        sectionRight1.setAlignment(Pos.CENTER);
+        sectionRight1.setPrefWidth(30);
+
+        VBox sectionRight2 = new VBox(bOlahraga1);
+        sectionRight2.setSpacing(70);
+        sectionRight2.setAlignment(Pos.CENTER);
+        sectionRight2.setPrefWidth(70);
+
+        VBox sectionRight3 = new VBox(bOlahraga2);
+        sectionRight3.setSpacing(70);
+        sectionRight3.setAlignment(Pos.CENTER);
+        sectionRight3.setPrefWidth(70);
+
+        VBox sectionRight4 = new VBox(bOlahraga3);
+        sectionRight4.setSpacing(70);
+        sectionRight4.setAlignment(Pos.CENTER);
+        sectionRight4.setPrefWidth(70);
 
         //Action untuk Button
-        //.setOnAction(v->{
-          //  stage.setScene(getScene2());
-        ///});
+        bOlahraga1.setOnAction(v -> {
+            stage.setScene(getScene3());
+        });
+
+        bOlahraga2.setOnAction(v -> {
+            stage.setScene(getScene4());
+        });
+
+        bOlahraga3.setOnAction(v -> {
+            stage.setScene(getScene5());
+        });
 
         //section
-        //ImageView ivBanner = new ImageView();
-        //ivBanner.setFitWidth(260);
-        //ivBanner.setFitHeight(300);
-        //ivBanner.setPreserveRatio(True);
+        ImageView ivBanner1 = new ImageView("/images/lari.png");
+        ivBanner1.setFitWidth(100);
+        ivBanner1.setFitHeight(100);
+        ivBanner1.setPreserveRatio(true);
+
+        ImageView ivBanner2 = new ImageView("/images/sepeda.png");
+        ivBanner2.setFitWidth(100);
+        ivBanner2.setFitHeight(100);
+        ivBanner2.setPreserveRatio(true);
+
+        ImageView ivBanner3 = new ImageView("/images/renang.png");
+        ivBanner3.setFitWidth(100);
+        ivBanner3.setFitHeight(100);
+        ivBanner3.setPreserveRatio(true);
 
         //rootNode
-        VBox rootNode = new VBox(sectionRight);
+        VBox rootNode = new VBox(sectionRight1, ivBanner1, sectionRight2, ivBanner2, sectionRight3, ivBanner3,
+                sectionRight4);
         rootNode.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(new StackPane(rootNode),640, 480);
+        Scene scene = new Scene(new StackPane(rootNode), 500, 400);
 
         //atur css
         //scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         return scene;
     }
     
+    private Scene getScene3() {
+
+        Text tTitle = new Text("Perhitungan Kalori Olahraga Lari");
+        Label lName = new Label("Masukkan Nama");
+        TextField tName = new TextField();
+        Label lDuration = new Label("Durasi Berlari");
+        TextField tDuration = new TextField();
+        Label lDistance = new Label("Jarak Berlari");
+        TextField tDistance = new TextField();
+        Button bBack = new Button("Kembali Halaman Utama");
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bBack);
+        sectionRight.setSpacing(50);
+        sectionRight.setAlignment(Pos.CENTER);
+        sectionRight.setPrefWidth(30);
+
+        //Action untuk Button
+        bBack.setOnAction(v -> {
+            stage.setScene(getScene2());
+        });
+
+        // rootNode
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bBack);
+        rootNode.setAlignment(Pos.TOP_CENTER);
+
+        Scene scene = new Scene(new StackPane(rootNode), 500, 400);
+
+        return scene;
+    }
+
+    private Scene getScene4() {
+
+        Text tTitle = new Text("Perhitungan Kalori Olahraga Sepeda");
+        Label lName = new Label("Masukkan Nama");
+        TextField tName = new TextField();
+        Label lDuration = new Label("Durasi Bersepeda");
+        TextField tDuration = new TextField();
+        Label lDistance = new Label("Jarak Tempuh");
+        TextField tDistance = new TextField();
+        Button bBack = new Button("Kembali Halaman Utama");
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bBack);
+        sectionRight.setSpacing(50);
+        sectionRight.setAlignment(Pos.CENTER);
+        sectionRight.setPrefWidth(30);
+
+        //Action untuk Button
+        bBack.setOnAction(v -> {
+            stage.setScene(getScene2());
+        });
+
+        // rootNode
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bBack);
+        rootNode.setAlignment(Pos.TOP_CENTER);
+
+        Scene scene = new Scene(new StackPane(rootNode), 500, 400);
+
+        return scene;
+    }
+
+    private Scene getScene5() {
+
+        Text tTitle = new Text("Perhitungan Kalori Olahraga Renang");
+        Label lName = new Label("Masukkan Nama");
+        TextField tName = new TextField();
+        Label lDuration = new Label("Durasi Berenang");
+        TextField tDuration = new TextField();
+        Label lGaya = new Label("Gaya Renang (Bebas, Dada, Punggung, Kupu-Kupu)");
+        TextField tGaya = new TextField();
+        Label lIntensitas = new Label("Intensitas (Sedang atau Tinggi)");
+        TextField tIntensitas = new TextField();
+        Button bBack = new Button("Kembali Halaman Utama");
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas,tIntensitas, bBack);
+        sectionRight.setSpacing(50);
+        sectionRight.setAlignment(Pos.CENTER);
+        sectionRight.setPrefWidth(30);
+
+        //Action untuk Button
+        bBack.setOnAction(v -> {
+            stage.setScene(getScene2());
+        });
+
+        // rootNode
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas,tIntensitas, bBack);
+        rootNode.setAlignment(Pos.TOP_CENTER);
+
+        Scene scene = new Scene(new StackPane(rootNode), 500, 400);
+
+        return scene;
+    }
+
+    // private double setCaloriePerKm(double distance, double duration) {
+    //     double speed = distance / getDuration(); // Kecepatan dalam km/jam
+    //     if (speed >= 3 && speed <= 4) {
+    //         caloriePerKm = 30; // Jalan kaki ringan
+    //     } else if (speed >= 5 && speed <= 6) {
+    //         caloriePerKm = 50; // Lari pelan
+    //     } else if (speed >= 7 && speed <= 8) {
+    //         caloriePerKm = 80; // Lari sedang
+    //     } else if (speed >= 9 && speed <= 10) {
+    //         caloriePerKm = 100; // Lari cepat
+    //     } else if (speed >= 11 && speed <= 12) {
+    //         caloriePerKm = 130; // Lari cepat
+    //     } else if (speed > 12) {
+    //         caloriePerKm = 170; // Sprint
+    //     } else {
+    //         caloriePerKm = 0; // Tidak ada data kalori yang tersedia
+    //     }
+    // }
+
+    // @Override
+    // public double calculateCaloriesBurned() {
+    //     return distance * caloriePerKm;
+    // }
 
 
     public static void main(String[] args) {
