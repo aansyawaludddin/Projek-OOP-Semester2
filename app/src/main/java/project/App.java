@@ -31,10 +31,10 @@ public class App extends Application {
 
     private Scene getScene1(){
 
-        Text tTitle = new Text("Aplikasi Perhitungan Kalori");
+        Text tTitle = new Text("Code Altletics");
         Button bMulai = new Button("Mulai");
         VBox sectionRight = new VBox(tTitle, bMulai);
-        sectionRight.setSpacing(50);
+        sectionRight.setSpacing(10);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
 
