@@ -136,8 +136,10 @@ public class App extends Application {
         TextField tDuration = new TextField();
         Label lDistance = new Label("Jarak Berlari");
         TextField tDistance = new TextField();
+        Button bCalculate = new Button("Calculate Calori");
+        Label lResults = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -147,8 +149,16 @@ public class App extends Application {
             stage.setScene(getScene2());
         });
 
+        bCalculate.setOnAction(v -> {
+            try {
+                
+            } catch (Exception e) {
+                
+            }
+        });
+
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bBack);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
 
         Scene scene = new Scene(new StackPane(rootNode), 500, 400);
@@ -165,8 +175,10 @@ public class App extends Application {
         TextField tDuration = new TextField();
         Label lDistance = new Label("Jarak Tempuh");
         TextField tDistance = new TextField();
+        Button bCalculate = new Button("Calculate Calori");
+        Label lResults = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -176,8 +188,16 @@ public class App extends Application {
             stage.setScene(getScene2());
         });
 
+        bCalculate.setOnAction(v -> {
+            try {
+                
+            } catch (Exception e) {
+                
+            }
+        });
+
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bBack);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
 
         Scene scene = new Scene(new StackPane(rootNode), 500, 400);
@@ -196,8 +216,10 @@ public class App extends Application {
         TextField tGaya = new TextField();
         Label lIntensitas = new Label("Intensitas (Sedang atau Tinggi)");
         TextField tIntensitas = new TextField();
+        Button bCalculate = new Button("Calculate Calori");
+        Label lResults = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas,tIntensitas, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas, bCalculate, lResults, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -207,8 +229,16 @@ public class App extends Application {
             stage.setScene(getScene2());
         });
 
+        bCalculate.setOnAction(v -> {
+            try {
+                
+            } catch (Exception e) {
+                
+            }
+        });
+
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas,tIntensitas, bBack);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,bCalculate, lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
 
         Scene scene = new Scene(new StackPane(rootNode), 500, 400);
