@@ -3,6 +3,8 @@
  */
 package project;
 
+import 
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -151,9 +153,18 @@ public class App extends Application {
 
         bCalculate.setOnAction(v -> {
             try {
+                String name = tName.getText();
+                int duration = Integer.parseInt(tDuration.getText());
+                double distance = Double.parseDouble(tDistance.getText());
+
+                Running running = new Running(name, duration, distance);
+                running.setCaloriePerKm();
+                double caloriesBurned = running.calculateCaloriesBurned();
                 
-            } catch (Exception e) {
-                
+                lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+            
+            } catch (NumberFormatException e) {
+                lResults.setText("Input tidak valid!");
             }
         });
 
@@ -178,7 +189,7 @@ public class App extends Application {
         Button bCalculate = new Button("Calculate Calori");
         Label lResults = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -190,14 +201,21 @@ public class App extends Application {
 
         bCalculate.setOnAction(v -> {
             try {
-                
-            } catch (Exception e) {
-                
+                String name = tName.getText();
+                int duration = Integer.parseInt(tDuration.getText());
+                double distance = Double.parseDouble(tDistance.getText());
+
+                Cycling cycling = new Cycling(name, duration, distance);
+                double caloriesBurned = cycling.calculateCaloriesBurned();
+
+                lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+            } catch (NumberFormatException e) {
+                lResults.setText("Input tidak valid!");
             }
         });
 
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
 
         Scene scene = new Scene(new StackPane(rootNode), 500, 400);
@@ -219,7 +237,8 @@ public class App extends Application {
         Button bCalculate = new Button("Calculate Calori");
         Label lResults = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas, bCalculate, lResults, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
+                bCalculate, lResults, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -231,46 +250,30 @@ public class App extends Application {
 
         bCalculate.setOnAction(v -> {
             try {
-                
-            } catch (Exception e) {
-                
+                String name = tName.getText();
+                int duration = Integer.parseInt(tDuration.getText());
+                String style = tGaya.getText();
+                String intensity = tIntensitas.getText();
+
+                Swimming swimming = new Swimming(name, duration, style, intensity);
+                double caloriesBurned = swimming.calculateCaloriesBurned();
+
+                lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+            } catch (NumberFormatException e) {
+                lResults.setText("Input tidak valid!");
             }
         });
 
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,bCalculate, lResults, bBack);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
+                bCalculate, lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
 
         Scene scene = new Scene(new StackPane(rootNode), 500, 400);
 
         return scene;
     }
-
-    // private double setCaloriePerKm(double distance, double duration) {
-    //     double speed = distance / getDuration(); // Kecepatan dalam km/jam
-    //     if (speed >= 3 && speed <= 4) {
-    //         caloriePerKm = 30; // Jalan kaki ringan
-    //     } else if (speed >= 5 && speed <= 6) {
-    //         caloriePerKm = 50; // Lari pelan
-    //     } else if (speed >= 7 && speed <= 8) {
-    //         caloriePerKm = 80; // Lari sedang
-    //     } else if (speed >= 9 && speed <= 10) {
-    //         caloriePerKm = 100; // Lari cepat
-    //     } else if (speed >= 11 && speed <= 12) {
-    //         caloriePerKm = 130; // Lari cepat
-    //     } else if (speed > 12) {
-    //         caloriePerKm = 170; // Sprint
-    //     } else {
-    //         caloriePerKm = 0; // Tidak ada data kalori yang tersedia
-    //     }
-    // }
-
-    // @Override
-    // public double calculateCaloriesBurned() {
-    //     return distance * caloriePerKm;
-    // }
-
-
+    
     public static void main(String[] args) {
         launch(args);
     }

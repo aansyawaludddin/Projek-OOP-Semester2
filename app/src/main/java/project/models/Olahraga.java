@@ -36,7 +36,7 @@ class Running extends Sport {
     private double distance; // dalam kilometer
     private double caloriePerKm;
 
-    public Running(String name, int duration,double distance) {
+    public Running(String name, int duration, double distance) {
         super(name, duration);
         this.distance = distance;
     }
@@ -147,8 +147,3 @@ class Swimming extends Sport {
         return calories;
     }
 }
-
-
-
-
-
