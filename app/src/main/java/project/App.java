@@ -4,15 +4,18 @@
 package project;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import project.models.Cycling;
 import project.models.Running;
@@ -34,32 +37,47 @@ public class App extends Application {
 
     private Scene getScene1(){
 
-        Text tTitle = new Text("Code Altletics");
+        StackPane spLayout = new StackPane();
+        Scene scene = new Scene(spLayout, 640, 480);
+        scene.getStylesheets().add(getClass().getResource("/styles/home.css").toExternalForm());
+
+        //Setting background
+        ImageView ivBackground = new ImageView("/images/Background.jpg");
+        ivBackground.setFitWidth(scene.getWidth());
+        ivBackground.setFitHeight(scene.getHeight());
+        spLayout.getChildren().add(ivBackground);
+
+        //Text Tittle
+        Text tLeft = new Text("Code");
+        tLeft.getStyleClass().add("title-text-left");
+        Text tRight = new Text("Altletics");
+        tRight.getStyleClass().add("title-text-right");
+        TextFlow tfTitle = new TextFlow(tLeft, tRight);
+
+        // Text deskripsi
+        Label lDesk = new Label(
+                "Mau mengetahui Kalori yang dikeluarkan ketika olahraga? Gunakan Aplikasi ini untuk menghitung Kalori");
+        lDesk.getStyleClass().add("desc-text");
+        lDesk.setWrapText(true);
+        lDesk.setMaxWidth(355);
+
+        //Button Mulai
+        Region space = new Region();
+        space.setPrefHeight(12);
         Button bMulai = new Button("Mulai");
-        VBox sectionRight = new VBox(tTitle, bMulai);
-        sectionRight.setSpacing(10);
-        sectionRight.setAlignment(Pos.CENTER);
-        sectionRight.setPrefWidth(30);
+        bMulai.getStyleClass().add("btn-explore");
+
+        // Vbox layout
+        VBox vLayout = new VBox( tfTitle, lDesk, space, bMulai);
+        vLayout.setSpacing(10);
+        spLayout.getChildren().add(vLayout);
+        vLayout.setPadding(new Insets(70));
+        vLayout.setAlignment(Pos.CENTER);
 
         //Action untuk Button
         bMulai.setOnAction(v->{
             stage.setScene(getScene2());
         });
-
-        //section
-        ImageView ivBanner = new ImageView("/images/1.png");
-        ivBanner.setFitWidth(260);
-        ivBanner.setFitHeight(300);
-        ivBanner.setPreserveRatio(true);
-
-        //rootNode
-        VBox rootNode = new VBox(ivBanner,sectionRight);
-        rootNode.setAlignment(Pos.CENTER);
-
-        Scene scene = new Scene(new StackPane(rootNode),500, 400);
-
-        //atur css
-        //scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
         return scene;
     }
 
@@ -123,7 +141,7 @@ public class App extends Application {
                 sectionRight4);
         rootNode.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(new StackPane(rootNode), 500, 400);
+        Scene scene = new Scene(new StackPane(rootNode), 640, 480);
 
         //atur css
         //scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
@@ -173,7 +191,7 @@ public class App extends Application {
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
 
-        Scene scene = new Scene(new StackPane(rootNode), 500, 400);
+        Scene scene = new Scene(new StackPane(rootNode), 640, 480);
 
         return scene;
     }
@@ -220,7 +238,7 @@ public class App extends Application {
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
 
-        Scene scene = new Scene(new StackPane(rootNode), 500, 400);
+        Scene scene = new Scene(new StackPane(rootNode), 640, 480);
 
         return scene;
     }
@@ -271,7 +289,7 @@ public class App extends Application {
                 bCalculate, lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
 
-        Scene scene = new Scene(new StackPane(rootNode), 500, 400);
+        Scene scene = new Scene(new StackPane(rootNode), 640, 480);
 
         return scene;
     }
