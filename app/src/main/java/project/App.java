@@ -223,7 +223,6 @@ public class App extends Application {
                 String name = tName.getText();
                 int duration = Integer.parseInt(tDuration.getText());
                 double distance = Double.parseDouble(tDistance.getText());
-                duration /= 60;
 
                 Cycling cycling = new Cycling(name, duration, distance);
                 double caloriesBurned = cycling.calculateCaloriesBurned();
@@ -274,6 +273,7 @@ public class App extends Application {
                 int duration = Integer.parseInt(tDuration.getText());
                 String style = tGaya.getText();
                 String intensity = tIntensitas.getText();
+                duration /= 60;
 
                 Swimming swimming = new Swimming(name, duration, style, intensity);
                 double caloriesBurned = swimming.calculateCaloriesBurned();
