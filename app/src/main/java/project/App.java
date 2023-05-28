@@ -86,6 +86,9 @@ public class App extends Application {
         Button bOlahraga1 = new Button("RUNNING");
         Button bOlahraga2 = new Button("CYCLING");
         Button bOlahraga3 = new Button("SWIMMING");
+        bOlahraga1.getStyleClass().add("bOlahraga1");
+        bOlahraga2.getStyleClass().add("bOlahraga2");
+        bOlahraga3.getStyleClass().add("bOlahraga3");
 
         VBox sectionRight1 = new VBox(tTitle);
         sectionRight1.setSpacing(50);
@@ -140,11 +143,12 @@ public class App extends Application {
         VBox rootNode = new VBox(sectionRight1, ivBanner1, sectionRight2, ivBanner2, sectionRight3, ivBanner3,
                 sectionRight4);
         rootNode.setAlignment(Pos.CENTER);
+        rootNode.getStyleClass().add("Bg");
 
         Scene scene = new Scene(new StackPane(rootNode), 640, 480);
 
         //atur css
-        //scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         return scene;
     }
     

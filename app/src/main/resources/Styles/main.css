@@ -1,0 +1,35 @@
+.bOlahraga1 {
+  -fx-background-color: rgba(197, 231, 26, 0.586);
+  -fx-text-fill: "#323232";
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+  -fx-min-width: 171px;
+  -fx-min-height: 38px;
+  -fx-background-radius: 42px;
+}
+
+.bOlahraga2 {
+  -fx-background-color: green;
+  -fx-text-fill: "#323232";
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+  -fx-min-width: 171px;
+  -fx-min-height: 38px;
+  -fx-background-radius: 42px;
+}
+
+.bOlahraga3 {
+  -fx-background-color: rgb(19, 19, 237);
+  -fx-text-fill: "#323232";
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+  -fx-min-width: 171px;
+  -fx-min-height: 38px;
+  -fx-background-radius: 42px;
+}
+
+.Bg{
+    -fx-background-color: rgba(136, 221, 117, 0.393);
+}
+
+
