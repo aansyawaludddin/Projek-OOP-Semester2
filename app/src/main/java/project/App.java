@@ -3,8 +3,6 @@
  */
 package project;
 
-import 
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,6 +14,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import project.models.Cycling;
+import project.models.Running;
+import project.models.Swimming;
 
 public class App extends Application {
     private Stage stage;
@@ -152,21 +153,21 @@ public class App extends Application {
         });
 
         bCalculate.setOnAction(v -> {
-            try {
-                String name = tName.getText();
-                int duration = Integer.parseInt(tDuration.getText());
-                double distance = Double.parseDouble(tDistance.getText());
+        try {
+            String name = tName.getText();
+            int duration = Integer.parseInt(tDuration.getText());
+            double distance = Double.parseDouble(tDistance.getText());
+            duration /= 60; // Menyimpan hasil pembagian ke variabel duration
 
-                Running running = new Running(name, duration, distance);
-                running.setCaloriePerKm();
-                double caloriesBurned = running.calculateCaloriesBurned();
-                
-                lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
-            
-            } catch (NumberFormatException e) {
-                lResults.setText("Input tidak valid!");
-            }
+            Running running = new Running(name, duration, distance);
+            running.setCaloriePerKm();
+            double caloriesBurned = running.calculateCaloriesBurned();
+            lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+        } catch (NumberFormatException e) {
+            lResults.setText("Input tidak valid!");
+        }
         });
+
 
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
@@ -183,11 +184,11 @@ public class App extends Application {
         Label lName = new Label("Masukkan Nama");
         TextField tName = new TextField();
         Label lDuration = new Label("Durasi Bersepeda");
-        TextField tDuration = new TextField();
+        TextField tDuration = new TextField("");
         Label lDistance = new Label("Jarak Tempuh");
-        TextField tDistance = new TextField();
+        TextField tDistance = new TextField("");
         Button bCalculate = new Button("Calculate Calori");
-        Label lResults = new Label();
+        Label lResults = new Label("");
         Button bBack = new Button("Kembali Halaman Utama");
         VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack);
         sectionRight.setSpacing(50);
@@ -204,6 +205,7 @@ public class App extends Application {
                 String name = tName.getText();
                 int duration = Integer.parseInt(tDuration.getText());
                 double distance = Double.parseDouble(tDistance.getText());
+                duration /= 60;
 
                 Cycling cycling = new Cycling(name, duration, distance);
                 double caloriesBurned = cycling.calculateCaloriesBurned();
