@@ -71,6 +71,14 @@
   -fx-background-color : rgba(190, 56, 220, 0.874);
 }
 
+.tGaya{
+  -fx-background-color : rgba(190, 56, 220, 0.874);
+}
+
+.tIntensitas {
+  -fx-background-color : rgba(190, 56, 220, 0.874);
+}
+
 .inputan{
   -fx-padding: 100px 300px;
 }

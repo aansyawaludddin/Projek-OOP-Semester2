@@ -234,6 +234,13 @@ public class App extends Application {
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
 
+        tTitle.getStyleClass().add("title");
+        tName.getStyleClass().add("tName");
+        tDuration.getStyleClass().add("tDuration");
+        tDistance.getStyleClass().add("tDistance");
+        bCalculate.getStyleClass().add("bCalculate");
+        bBack.getStyleClass().add("back");
+
         //Action untuk Button
         bBack.setOnAction(v -> {
             stage.setScene(getScene2());
@@ -257,9 +264,13 @@ public class App extends Application {
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
+        rootNode.getStyleClass().add("inputan");
+        rootNode.getStyleClass().add("Bg");
 
         Scene scene = new Scene(new StackPane(rootNode), 640, 480);
 
+        // atur css
+        scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         return scene;
     }
 
@@ -277,11 +288,18 @@ public class App extends Application {
         Button bCalculate = new Button("Calculate Calori");
         Label lResults = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
-                bCalculate, lResults, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas, bCalculate, lResults, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
+
+        tTitle.getStyleClass().add("title");
+        tName.getStyleClass().add("tName");
+        tDuration.getStyleClass().add("tDuration");
+        tGaya.getStyleClass().add("tGaya");
+        tIntensitas.getStyleClass().add("tIntensitas");
+        bCalculate.getStyleClass().add("bCalculate");
+        bBack.getStyleClass().add("back");
 
         //Action untuk Button
         bBack.setOnAction(v -> {
@@ -309,9 +327,13 @@ public class App extends Application {
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
                 bCalculate, lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
+        rootNode.getStyleClass().add("inputan");
+        rootNode.getStyleClass().add("Bg");
 
         Scene scene = new Scene(new StackPane(rootNode), 640, 480);
 
+        // atur css
+        scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         return scene;
     }
     
