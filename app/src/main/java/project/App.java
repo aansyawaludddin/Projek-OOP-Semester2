@@ -86,9 +86,12 @@ public class App extends Application {
         Button bOlahraga1 = new Button("RUNNING");
         Button bOlahraga2 = new Button("CYCLING");
         Button bOlahraga3 = new Button("SWIMMING");
+        Button bHistory = new Button("Riwayat pembuangan Kalori");
+
         bOlahraga1.getStyleClass().add("bOlahraga1");
         bOlahraga2.getStyleClass().add("bOlahraga2");
         bOlahraga3.getStyleClass().add("bOlahraga3");
+        bHistory.getStyleClass().add("bHistory");
 
         VBox sectionRight1 = new VBox(tTitle);
         sectionRight1.setSpacing(50);
@@ -109,6 +112,9 @@ public class App extends Application {
         sectionRight4.setSpacing(70);
         sectionRight4.setAlignment(Pos.CENTER);
         sectionRight4.setPrefWidth(70);
+
+        VBox sectionRight5 = new VBox(bHistory);
+        sectionRight5.setAlignment(Pos.BOTTOM_RIGHT);
 
         //Action untuk Button
         bOlahraga1.setOnAction(v -> {
@@ -141,7 +147,7 @@ public class App extends Application {
 
         //rootNode
         VBox rootNode = new VBox(sectionRight1, ivBanner1, sectionRight2, ivBanner2, sectionRight3, ivBanner3,
-                sectionRight4);
+                sectionRight4, sectionRight5);
         rootNode.setAlignment(Pos.CENTER);
         rootNode.getStyleClass().add("Bg");
 
@@ -164,10 +170,14 @@ public class App extends Application {
         Button bCalculate = new Button("Calculate Calori");
         Label lResults = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
+
+        tTitle.getStyleClass().add("title");
+        bCalculate.getStyleClass().add("bCalculate");
+        bBack.getStyleClass().add("back");
 
         //Action untuk Button
         bBack.setOnAction(v -> {
@@ -194,9 +204,13 @@ public class App extends Application {
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
         rootNode.setAlignment(Pos.TOP_CENTER);
+        rootNode.getStyleClass().add("inputan");
+        rootNode.getStyleClass().add("Bg");
 
         Scene scene = new Scene(new StackPane(rootNode), 640, 480);
 
+        //atur css
+        scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         return scene;
     }
 
