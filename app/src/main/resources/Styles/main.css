@@ -59,6 +59,18 @@
   -fx-font-weight: bold;
 }
 
+.tName{
+  -fx-background-color : rgba(190, 56, 220, 0.874);
+}
+
+.tDuration{
+  -fx-background-color : rgba(190, 56, 220, 0.874);
+}
+
+.tDistance{
+  -fx-background-color : rgba(190, 56, 220, 0.874);
+}
+
 .inputan{
   -fx-padding: 100px 300px;
 }

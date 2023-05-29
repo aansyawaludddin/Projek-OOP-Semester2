@@ -10,7 +10,7 @@ public class Running extends Sport {
     }
 
     public void setCaloriePerKm() {
-        double speed = distance / getDuration()/ 60; // Kecepatan dalam km/jam
+        double speed = distance / getDuration(); // Kecepatan dalam km/jam
         if (speed >= 3 && speed <= 4) {
             caloriePerKm = 30; // Jalan kaki ringan
         } else if (speed >= 5 && speed <= 6) {

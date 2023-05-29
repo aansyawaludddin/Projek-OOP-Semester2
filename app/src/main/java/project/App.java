@@ -176,6 +176,9 @@ public class App extends Application {
         sectionRight.setPrefWidth(30);
 
         tTitle.getStyleClass().add("title");
+        tName.getStyleClass().add("tName");
+        tDuration.getStyleClass().add("tDuration");
+        tDistance.getStyleClass().add("tDistance");
         bCalculate.getStyleClass().add("bCalculate");
         bBack.getStyleClass().add("back");
 
