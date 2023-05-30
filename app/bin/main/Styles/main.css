@@ -60,23 +60,23 @@
 }
 
 .tName{
-  -fx-background-color : rgba(190, 56, 220, 0.874);
+  -fx-background-color : white;
 }
 
 .tDuration{
-  -fx-background-color : rgba(190, 56, 220, 0.874);
+  -fx-background-color :white
 }
 
 .tDistance{
-  -fx-background-color : rgba(190, 56, 220, 0.874);
+  -fx-background-color :white
 }
 
 .tGaya{
-  -fx-background-color : rgba(190, 56, 220, 0.874);
+  -fx-background-color :white
 }
 
 .tIntensitas {
-  -fx-background-color : rgba(190, 56, 220, 0.874);
+  -fx-background-color :white
 }
 
 .inputan{

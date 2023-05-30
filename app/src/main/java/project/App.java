@@ -4,12 +4,17 @@
 package project;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -20,9 +25,12 @@ import javafx.stage.Stage;
 import project.models.Cycling;
 import project.models.Running;
 import project.models.Swimming;
+import project.models.Result;
+
 
 public class App extends Application {
     private Stage stage;
+
 
     @Override
     public void start(Stage mainStage) {
@@ -86,12 +94,10 @@ public class App extends Application {
         Button bOlahraga1 = new Button("RUNNING");
         Button bOlahraga2 = new Button("CYCLING");
         Button bOlahraga3 = new Button("SWIMMING");
-        Button bHistory = new Button("Riwayat pembuangan Kalori");
 
         bOlahraga1.getStyleClass().add("bOlahraga1");
         bOlahraga2.getStyleClass().add("bOlahraga2");
         bOlahraga3.getStyleClass().add("bOlahraga3");
-        bHistory.getStyleClass().add("bHistory");
 
         VBox sectionRight1 = new VBox(tTitle);
         sectionRight1.setSpacing(50);
@@ -112,9 +118,6 @@ public class App extends Application {
         sectionRight4.setSpacing(70);
         sectionRight4.setAlignment(Pos.CENTER);
         sectionRight4.setPrefWidth(70);
-
-        VBox sectionRight5 = new VBox(bHistory);
-        sectionRight5.setAlignment(Pos.BOTTOM_RIGHT);
 
         //Action untuk Button
         bOlahraga1.setOnAction(v -> {
@@ -147,7 +150,7 @@ public class App extends Application {
 
         //rootNode
         VBox rootNode = new VBox(sectionRight1, ivBanner1, sectionRight2, ivBanner2, sectionRight3, ivBanner3,
-                sectionRight4, sectionRight5);
+                sectionRight4);
         rootNode.setAlignment(Pos.CENTER);
         rootNode.getStyleClass().add("Bg");
 
@@ -187,25 +190,54 @@ public class App extends Application {
             stage.setScene(getScene2());
         });
 
+        ObservableList<Result> exerciseRecords = FXCollections.observableArrayList();
+
+
         bCalculate.setOnAction(v -> {
         try {
             String name = tName.getText();
             int duration = Integer.parseInt(tDuration.getText());
             double distance = Double.parseDouble(tDistance.getText());
-            duration /= 60; // Menyimpan hasil pembagian ke variabel duration
 
             Running running = new Running(name, duration, distance);
             running.setCaloriePerKm();
             double caloriesBurned = running.calculateCaloriesBurned();
             lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+            exerciseRecords.add(new Result(name, "Running", duration, distance, caloriesBurned));
         } catch (NumberFormatException e) {
             lResults.setText("Input tidak valid!");
         }
         });
 
+         // Create TableView and columns
+        TableView<Result> tableView = new TableView<>();
+        TableColumn<Result, String> nameColumn = new TableColumn<>("Nama");
+        TableColumn<Result, String> sportColumn = new TableColumn<>("Olahraga");
+        TableColumn<Result, Double> durationColumn = new TableColumn<>("Durasi");
+        TableColumn<Result, Double> distanceColumn = new TableColumn<>("Distance");
+        TableColumn<Result, Double> caloriColumn = new TableColumn<>("Calori");
+        
+
+
+        // Set value factories for columns
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        sportColumn.setCellValueFactory(new PropertyValueFactory<>("sport"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
+        caloriColumn.setCellValueFactory(new PropertyValueFactory<>("calori"));
+
+        // Add columns to TableView
+        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn);
+
+        // Create ObservableList to store exercise records
+
+        // Add exercise records to the TableView
+        tableView.setItems(exerciseRecords);
+        
+
 
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
         rootNode.getStyleClass().add("inputan");
         rootNode.getStyleClass().add("Bg");
@@ -288,7 +320,8 @@ public class App extends Application {
         Button bCalculate = new Button("Calculate Calori");
         Label lResults = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas, bCalculate, lResults, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
+                bCalculate, lResults, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -336,6 +369,8 @@ public class App extends Application {
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         return scene;
     }
+
+    
     
     public static void main(String[] args) {
         launch(args);
