@@ -1,4 +1,6 @@
 package project.models;
+
+
 // Class Lari (inherit dari Sport)
 public class Running extends Sport {
     private double distance; // dalam kilometer
@@ -10,7 +12,7 @@ public class Running extends Sport {
     }
 
     public void setCaloriePerKm() {
-        double speed = distance / getDuration(); // Kecepatan dalam km/jam
+        double speed = distance; // Kecepatan dalam km/jam
         if (speed >= 3 && speed <= 4) {
             caloriePerKm = 15; // Jalan kaki ringan
         } else if (speed >= 5 && speed <= 6) {
