@@ -232,13 +232,9 @@ public class App extends Application {
         // Add columns to TableView
         tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn);
 
-        // Create ObservableList to store exercise records
-
         // Add exercise records to the TableView
         tableView.setItems(exerciseRecords);
         
-
-
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
@@ -281,6 +277,8 @@ public class App extends Application {
             stage.setScene(getScene2());
         });
 
+        ObservableList<Result> exerciseRecords = FXCollections.observableArrayList();
+
         bCalculate.setOnAction(v -> {
             try {
                 String name = tName.getText();
@@ -289,15 +287,36 @@ public class App extends Application {
 
                 Cycling cycling = new Cycling(name, duration, distance);
                 double caloriesBurned = cycling.calculateCaloriesBurned();
-
                 lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+                exerciseRecords.add(new Result(name, "Cycling", duration, distance, caloriesBurned));
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
             }
         });
 
+        // Create TableView and columns
+        TableView<Result> tableView = new TableView<>();
+        TableColumn<Result, String> nameColumn = new TableColumn<>("Nama");
+        TableColumn<Result, String> sportColumn = new TableColumn<>("Olahraga");
+        TableColumn<Result, Double> durationColumn = new TableColumn<>("Durasi");
+        TableColumn<Result, Double> distanceColumn = new TableColumn<>("Distance");
+        TableColumn<Result, Double> caloriColumn = new TableColumn<>("Calori");
+        
+        // Set value factories for columns
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        sportColumn.setCellValueFactory(new PropertyValueFactory<>("sport"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
+        caloriColumn.setCellValueFactory(new PropertyValueFactory<>("calori"));
+
+        // Add columns to TableView
+        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn);
+
+        // Add exercise records to the TableView
+        tableView.setItems(exerciseRecords);
+
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
         rootNode.getStyleClass().add("inputan");
         rootNode.getStyleClass().add("Bg");
