@@ -12,17 +12,17 @@ public class Running extends Sport {
     public void setCaloriePerKm() {
         double speed = distance / getDuration(); // Kecepatan dalam km/jam
         if (speed >= 3 && speed <= 4) {
-            caloriePerKm = 30; // Jalan kaki ringan
+            caloriePerKm = 15; // Jalan kaki ringan
         } else if (speed >= 5 && speed <= 6) {
-            caloriePerKm = 50; // Lari pelan
+            caloriePerKm = 25; // Lari pelan
         } else if (speed >= 7 && speed <= 8) {
-            caloriePerKm = 80; // Lari sedang
+            caloriePerKm = 40; // Lari sedang
         } else if (speed >= 9 && speed <= 10) {
-            caloriePerKm = 100; // Lari cepat
+            caloriePerKm = 50; // Lari cepat
         } else if (speed >= 11 && speed <= 12) {
-            caloriePerKm = 130; // Lari cepat
+            caloriePerKm = 65; // Lari cepat
         } else if (speed > 12) {
-            caloriePerKm = 170; // Sprint
+            caloriePerKm = 85; // Sprint
         } else {
             caloriePerKm = 0; // Tidak ada data kalori yang tersedia
         }

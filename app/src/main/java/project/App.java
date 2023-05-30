@@ -219,8 +219,6 @@ public class App extends Application {
         TableColumn<Result, Double> durationColumn = new TableColumn<>("Durasi");
         TableColumn<Result, Double> distanceColumn = new TableColumn<>("Distance");
         TableColumn<Result, Double> caloriColumn = new TableColumn<>("Calori");
-        
-
 
         // Set value factories for columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -231,6 +229,23 @@ public class App extends Application {
 
         // Add columns to TableView
         tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn);
+
+        // Set number of visible columns
+        int numberOfColumns = 5;
+
+        // Set column resize policy
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        // Set fixed cell size to evenly distribute the available height
+        tableView.setFixedCellSize(220.0 / (numberOfColumns + 1));
+
+        // Set preferred widths for columns
+        double columnWidth = 640.0 / numberOfColumns;
+        nameColumn.setPrefWidth(columnWidth);
+        sportColumn.setPrefWidth(columnWidth);
+        durationColumn.setPrefWidth(columnWidth);
+        distanceColumn.setPrefWidth(columnWidth);
+        caloriColumn.setPrefWidth(columnWidth);        
 
         // Add exercise records to the TableView
         tableView.setItems(exerciseRecords);
