@@ -95,6 +95,9 @@ public class App extends Application {
         Button bOlahraga2 = new Button("CYCLING");
         Button bOlahraga3 = new Button("SWIMMING");
 
+        Region space = new Region();
+        space.setPrefHeight(12);
+        tTitle.getStyleClass().add("title");
         bOlahraga1.getStyleClass().add("bOlahraga1");
         bOlahraga2.getStyleClass().add("bOlahraga2");
         bOlahraga3.getStyleClass().add("bOlahraga3");
@@ -149,7 +152,7 @@ public class App extends Application {
         ivBanner3.setPreserveRatio(true);
 
         //rootNode
-        VBox rootNode = new VBox(sectionRight1, ivBanner1, sectionRight2, ivBanner2, sectionRight3, ivBanner3,
+        VBox rootNode = new VBox(sectionRight1, space, ivBanner1, sectionRight2, ivBanner2, sectionRight3, ivBanner3,
                 sectionRight4);
         rootNode.setAlignment(Pos.CENTER);
         rootNode.getStyleClass().add("Bg");
