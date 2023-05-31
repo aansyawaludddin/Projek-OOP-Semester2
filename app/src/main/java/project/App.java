@@ -26,6 +26,7 @@ import project.models.Cycling;
 import project.models.Running;
 import project.models.Swimming;
 import project.models.Result;
+import project.models.Result2;
 
 
 public class App extends Application {
@@ -46,7 +47,7 @@ public class App extends Application {
     private Scene getScene1(){
 
         StackPane spLayout = new StackPane();
-        Scene scene = new Scene(spLayout, 640, 480);
+        Scene scene = new Scene(spLayout, 640, 640);
         scene.getStylesheets().add(getClass().getResource("/styles/home.css").toExternalForm());
 
         //Setting background
@@ -157,7 +158,7 @@ public class App extends Application {
         rootNode.setAlignment(Pos.CENTER);
         rootNode.getStyleClass().add("Bg");
 
-        Scene scene = new Scene(new StackPane(rootNode), 640, 480);
+        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
         //atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
@@ -205,6 +206,7 @@ public class App extends Application {
             Running running = new Running(name, duration, distance);
             running.setCaloriePerKm();
             double caloriesBurned = running.calculateCaloriesBurned();
+            
             lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
             exerciseRecords.add(new Result(name, "Running", duration, distance, caloriesBurned));
         } catch (NumberFormatException e) {
@@ -212,7 +214,7 @@ public class App extends Application {
         }
         });
 
-         // Create TableView and columns
+        // Create TableView and columns
         TableView<Result> tableView = new TableView<>();
         TableColumn<Result, String> nameColumn = new TableColumn<>("Nama");
         TableColumn<Result, String> sportColumn = new TableColumn<>("Olahraga");
@@ -256,7 +258,7 @@ public class App extends Application {
         rootNode.getStyleClass().add("inputan");
         rootNode.getStyleClass().add("Bg");
 
-        Scene scene = new Scene(new StackPane(rootNode), 640, 480);
+        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
         //atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
@@ -353,7 +355,7 @@ public class App extends Application {
         rootNode.getStyleClass().add("inputan");
         rootNode.getStyleClass().add("Bg");
 
-        Scene scene = new Scene(new StackPane(rootNode), 640, 480);
+        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
         // atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
@@ -393,31 +395,75 @@ public class App extends Application {
             stage.setScene(getScene2());
         });
 
+        ObservableList<Result2> exerciseRecords = FXCollections.observableArrayList();
+
         bCalculate.setOnAction(v -> {
             try {
                 String name = tName.getText();
                 int duration = Integer.parseInt(tDuration.getText());
                 String style = tGaya.getText();
                 String intensity = tIntensitas.getText();
-                duration /= 60;
 
                 Swimming swimming = new Swimming(name, duration, style, intensity);
                 double caloriesBurned = swimming.calculateCaloriesBurned();
 
                 lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+                exerciseRecords.add(new Result2(name, "Swimming", duration, style, intensity, caloriesBurned));
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
             }
         });
 
+        // Create TableView and columns
+        TableView<Result2> tableView = new TableView<>();
+        TableColumn<Result2, String> nameColumn = new TableColumn<>("Nama");
+        TableColumn<Result2, String> sportColumn = new TableColumn<>("Olahraga");
+        TableColumn<Result2, Double> durationColumn = new TableColumn<>("Durasi");
+        TableColumn<Result2, String> styleColumn = new TableColumn<>("Style");
+        TableColumn<Result2, String> intensityColumn = new TableColumn<>("Intensity");
+        TableColumn<Result2, Double> caloriColumn = new TableColumn<>("Calori");
+
+        // Set value factories for columns
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        sportColumn.setCellValueFactory(new PropertyValueFactory<>("sport"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        styleColumn.setCellValueFactory(new PropertyValueFactory<>("style"));
+        intensityColumn.setCellValueFactory(new PropertyValueFactory<>("intensity"));
+        caloriColumn.setCellValueFactory(new PropertyValueFactory<>("calori"));
+
+        // Add columns to TableView
+        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, styleColumn, intensityColumn,
+                caloriColumn);
+        
+        // Set number of visible columns
+        int numberOfColumns = 5;
+
+        // Set column resize policy
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        // Set fixed cell size to evenly distribute the available height
+        tableView.setFixedCellSize(220.0 / (numberOfColumns + 1));
+
+        // Set preferred widths for columns
+        double columnWidth = 640.0 / numberOfColumns;
+        nameColumn.setPrefWidth(columnWidth);
+        sportColumn.setPrefWidth(columnWidth);
+        durationColumn.setPrefWidth(columnWidth);
+        styleColumn.setPrefWidth(columnWidth);
+        intensityColumn.setPrefWidth(columnWidth);
+        caloriColumn.setPrefWidth(columnWidth);        
+
+        // Add exercise records to the TableView
+        tableView.setItems(exerciseRecords);
+
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
-                bCalculate, lResults, bBack);
+                bCalculate, lResults, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
         rootNode.getStyleClass().add("inputan");
         rootNode.getStyleClass().add("Bg");
 
-        Scene scene = new Scene(new StackPane(rootNode), 640, 480);
+        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
         // atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
