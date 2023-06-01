@@ -65,7 +65,7 @@ public class App extends Application {
 
         // Text deskripsi
         Label lDesk = new Label(
-                "Mau mengetahui Kalori yang dikeluarkan ketika olahraga? Gunakan Aplikasi ini untuk menghitung Kalori");
+                "Aplikasi Hitung Kalori Aktivitas Olahraga adalah sebuah aplikasi yang dirancang untuk membantu pengguna dalam menghitung jumlah kalori yang mereka bakar selama melakukan berbagai jenis aktivitas olahraga.");
         lDesk.getStyleClass().add("desc-text");
         lDesk.setWrapText(true);
         lDesk.setMaxWidth(355);
@@ -176,8 +176,9 @@ public class App extends Application {
         TextField tDistance = new TextField();
         Button bCalculate = new Button("Calculate Calori");
         Label lResults = new Label();
+        Label lRecommendedCalories = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, lRecommendedCalories, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -208,7 +209,12 @@ public class App extends Application {
             double caloriesBurned = running.calculateCaloriesBurned();
             
             lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
-            exerciseRecords.add(new Result(name, "Running", duration, distance, caloriesBurned));
+            
+            double recommendedCalories = caloriesBurned * 1.2;
+            lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
+
+            exerciseRecords.add(new Result(name, "Running", duration, distance, caloriesBurned, recommendedCalories)); 
+
         } catch (NumberFormatException e) {
             lResults.setText("Input tidak valid!");
         }
@@ -221,6 +227,7 @@ public class App extends Application {
         TableColumn<Result, Double> durationColumn = new TableColumn<>("Durasi");
         TableColumn<Result, Double> distanceColumn = new TableColumn<>("Distance");
         TableColumn<Result, Double> caloriColumn = new TableColumn<>("Calori");
+        TableColumn<Result, Double> recommendCaloriColumn = new TableColumn<>("Recommend Calori");
 
         // Set value factories for columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -228,12 +235,13 @@ public class App extends Application {
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
         distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
         caloriColumn.setCellValueFactory(new PropertyValueFactory<>("calori"));
+        recommendCaloriColumn.setCellValueFactory(new PropertyValueFactory<>("recommed"));
 
         // Add columns to TableView
-        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn);
+        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn, recommendCaloriColumn);
 
         // Set number of visible columns
-        int numberOfColumns = 5;
+        int numberOfColumns = 6;
 
         // Set column resize policy
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -247,13 +255,14 @@ public class App extends Application {
         sportColumn.setPrefWidth(columnWidth);
         durationColumn.setPrefWidth(columnWidth);
         distanceColumn.setPrefWidth(columnWidth);
-        caloriColumn.setPrefWidth(columnWidth);        
+        caloriColumn.setPrefWidth(columnWidth);
+        recommendCaloriColumn.setPrefWidth(columnWidth);
 
         // Add exercise records to the TableView
         tableView.setItems(exerciseRecords);
         
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, bBack, tableView);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, lRecommendedCalories, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
         rootNode.getStyleClass().add("inputan");
         rootNode.getStyleClass().add("Bg");
@@ -276,8 +285,9 @@ public class App extends Application {
         TextField tDistance = new TextField("");
         Button bCalculate = new Button("Calculate Calori");
         Label lResults = new Label("");
+        Label lRecommendedCalories = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, lRecommendedCalories, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -304,8 +314,14 @@ public class App extends Application {
 
                 Cycling cycling = new Cycling(name, duration, distance);
                 double caloriesBurned = cycling.calculateCaloriesBurned();
+
                 lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
-                exerciseRecords.add(new Result(name, "Cycling", duration, distance, caloriesBurned));
+
+                double recommendedCalories = caloriesBurned * 1.2;
+                lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
+
+                exerciseRecords.add(new Result(name, "Cycling", duration, distance, caloriesBurned, recommendedCalories));
+                
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
             }
@@ -318,6 +334,7 @@ public class App extends Application {
         TableColumn<Result, Double> durationColumn = new TableColumn<>("Durasi");
         TableColumn<Result, Double> distanceColumn = new TableColumn<>("Distance");
         TableColumn<Result, Double> caloriColumn = new TableColumn<>("Calori");
+        TableColumn<Result, Double> recommendCaloriColumn = new TableColumn<>("Recommend Calori");
         
         // Set value factories for columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -325,12 +342,13 @@ public class App extends Application {
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
         distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
         caloriColumn.setCellValueFactory(new PropertyValueFactory<>("calori"));
+        recommendCaloriColumn.setCellValueFactory(new PropertyValueFactory<>("recommend"));
 
         // Add columns to TableView
-        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn);
+        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn, recommendCaloriColumn);
 
         // Set number of visible columns
-        int numberOfColumns = 5;
+        int numberOfColumns = 6;
 
         // Set column resize policy
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -345,12 +363,13 @@ public class App extends Application {
         durationColumn.setPrefWidth(columnWidth);
         distanceColumn.setPrefWidth(columnWidth);
         caloriColumn.setPrefWidth(columnWidth);
+        recommendCaloriColumn.setPrefWidth(columnWidth);
         
         // Add exercise records to the TableView
         tableView.setItems(exerciseRecords);
 
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, bBack, tableView);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, lRecommendedCalories, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
         rootNode.getStyleClass().add("inputan");
         rootNode.getStyleClass().add("Bg");
@@ -375,9 +394,10 @@ public class App extends Application {
         TextField tIntensitas = new TextField();
         Button bCalculate = new Button("Calculate Calori");
         Label lResults = new Label();
+        Label lRecommendedCalories = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
         VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
-                bCalculate, lResults, bBack);
+                bCalculate, lResults,lRecommendedCalories, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -408,6 +428,10 @@ public class App extends Application {
                 double caloriesBurned = swimming.calculateCaloriesBurned();
 
                 lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+
+                double recommendedCalories = caloriesBurned * 1.2;
+                lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
+
                 exerciseRecords.add(new Result2(name, "Swimming", duration, style, intensity, caloriesBurned));
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
