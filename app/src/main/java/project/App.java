@@ -167,6 +167,15 @@ public class App extends Application {
     
     private Scene getScene3() {
 
+        StackPane spLayout = new StackPane();
+        Scene scene = new Scene(spLayout, 640, 640);
+
+        // Setting background
+        ImageView ivBackground = new ImageView("/images/lari.jpg");
+        ivBackground.setFitWidth(scene.getWidth());
+        ivBackground.setFitHeight(scene.getHeight());
+        spLayout.getChildren().add(ivBackground);
+
         Text tTitle = new Text("Perhitungan Kalori Olahraga Lari");
         Label lName = new Label("Masukkan Nama");
         TextField tName = new TextField();
@@ -196,7 +205,6 @@ public class App extends Application {
         });
 
         ObservableList<Result> exerciseRecords = FXCollections.observableArrayList();
-
 
         bCalculate.setOnAction(v -> {
         try {
@@ -264,10 +272,8 @@ public class App extends Application {
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, lRecommendedCalories, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
+        spLayout.getChildren().add(rootNode);
         rootNode.getStyleClass().add("inputan");
-        rootNode.getStyleClass().add("Bg");
-
-        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
         //atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
@@ -275,6 +281,15 @@ public class App extends Application {
     }
 
     private Scene getScene4() {
+
+        StackPane spLayout = new StackPane();
+        Scene scene = new Scene(spLayout, 640, 640);
+
+        // Setting background
+        ImageView ivBackground = new ImageView("/images/sepeda.jpg");
+        ivBackground.setFitWidth(scene.getWidth());
+        ivBackground.setFitHeight(scene.getHeight());
+        spLayout.getChildren().add(ivBackground);
 
         Text tTitle = new Text("Perhitungan Kalori Olahraga Sepeda");
         Label lName = new Label("Masukkan Nama");
@@ -372,10 +387,8 @@ public class App extends Application {
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, lRecommendedCalories, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
+        spLayout.getChildren().add(rootNode);
         rootNode.getStyleClass().add("inputan");
-        rootNode.getStyleClass().add("Bg");
-
-        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
         // atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
@@ -383,6 +396,15 @@ public class App extends Application {
     }
 
     private Scene getScene5() {
+
+        StackPane spLayout = new StackPane();
+        Scene scene = new Scene(spLayout, 640, 640);
+
+        // Setting background
+        ImageView ivBackground = new ImageView("/images/renang.jpg");
+        ivBackground.setFitWidth(scene.getWidth());
+        ivBackground.setFitHeight(scene.getHeight());
+        spLayout.getChildren().add(ivBackground);
 
         Text tTitle = new Text("Perhitungan Kalori Olahraga Renang");
         Label lName = new Label("Masukkan Nama");
@@ -488,10 +510,8 @@ public class App extends Application {
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
                 bCalculate, lResults,lRecommendedCalories, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
+        spLayout.getChildren().add(rootNode);
         rootNode.getStyleClass().add("inputan");
-        rootNode.getStyleClass().add("Bg");
-
-        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
         // atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
