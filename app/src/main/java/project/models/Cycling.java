@@ -3,11 +3,34 @@ package project.models;
 // Class Sepeda (inherit dari Sport)
 public class Cycling extends Sport {
     private double distance; // dalam kilometer
-    private double caloriePerKm;
+    private  double caloriePerKm;
+
+    public Cycling(String name, int duration, double distance, double caloriePerKm) {
+        super(name, duration);
+        this.distance = distance;
+        this.caloriePerKm = caloriePerKm;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public double getCaloriePerKm() {
+        return caloriePerKm;
+    }
+
+    public void setCaloriePerKm(double caloriePerKm) {
+        this.caloriePerKm = caloriePerKm;
+    }
 
     public Cycling(String name, int duration, double distance) {
         super(name, duration);
         this.distance = distance;
+
 
         // Menghitung kalori per kilometer berdasarkan MET yang sesuai
         double met;
