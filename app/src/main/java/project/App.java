@@ -434,6 +434,7 @@ public class App extends Application {
                 lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
 
                 exerciseRecords.add(new Result2(name, "Swimming", duration, style, intensity, caloriesBurned, recommendedCalories));
+         
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
             }
@@ -447,7 +448,7 @@ public class App extends Application {
         TableColumn<Result2, String> styleColumn = new TableColumn<>("Style");
         TableColumn<Result2, String> intensityColumn = new TableColumn<>("Intensity");
         TableColumn<Result2, Double> caloriColumn = new TableColumn<>("Calori");
-        TableColumn<Result2, Double> rCaloriColumn = new TableColumn<>("Recommend Calori");
+        TableColumn<Result2, Double> recommendCaloriColumn = new TableColumn<>("Recommend Calori");
 
         // Set value factories for columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -456,11 +457,10 @@ public class App extends Application {
         styleColumn.setCellValueFactory(new PropertyValueFactory<>("style"));
         intensityColumn.setCellValueFactory(new PropertyValueFactory<>("intensity"));
         caloriColumn.setCellValueFactory(new PropertyValueFactory<>("calori"));
-        rCaloriColumn.setCellValueFactory(new PropertyValueFactory<>("rCalori"));
+        recommendCaloriColumn.setCellValueFactory(new PropertyValueFactory<>("recommendCalori"));
 
         // Add columns to TableView
-        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, styleColumn, intensityColumn,
-                caloriColumn, rCaloriColumn);
+        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, styleColumn, intensityColumn, caloriColumn, recommendCaloriColumn);
         
         // Set number of visible columns
         int numberOfColumns = 6;
@@ -479,7 +479,7 @@ public class App extends Application {
         styleColumn.setPrefWidth(columnWidth);
         intensityColumn.setPrefWidth(columnWidth);
         caloriColumn.setPrefWidth(columnWidth);
-        rCaloriColumn.setPrefWidth(columnWidth);  
+        recommendCaloriColumn.setPrefWidth(columnWidth);  
 
         // Add exercise records to the TableView
         tableView.setItems(exerciseRecords);
