@@ -25,13 +25,13 @@ public class HomeScene {
         Scene scene = new Scene(spLayout, 640, 640);
         scene.getStylesheets().add(getClass().getResource("/styles/home.css").toExternalForm());
 
-        // Setting background
+        //Setting background
         ImageView ivBackground = new ImageView("/images/Background.jpg");
         ivBackground.setFitWidth(scene.getWidth());
         ivBackground.setFitHeight(scene.getHeight());
         spLayout.getChildren().add(ivBackground);
 
-        // Text Tittle
+        //Text Tittle
         Text tLeft = new Text("Code");
         tLeft.getStyleClass().add("title-text-left");
         Text tRight = new Text("Altletics");
@@ -45,18 +45,19 @@ public class HomeScene {
         lDesk.setWrapText(true);
         lDesk.setMaxWidth(355);
 
-        // Button Mulai
+        //Button Mulai
         Region space = new Region();
         space.setPrefHeight(12);
         Button bMulai = new Button("Mulai");
         bMulai.getStyleClass().add("btn-explore");
 
         // Vbox layout
-        VBox vLayout = new VBox(tfTitle, lDesk, space, bMulai);
+        VBox vLayout = new VBox( tfTitle, lDesk, space, bMulai);
         vLayout.setSpacing(10);
         spLayout.getChildren().add(vLayout);
         vLayout.setPadding(new Insets(70));
         vLayout.setAlignment(Pos.CENTER);
+
 
         // Action untuk Button
         bMulai.setOnAction(v -> {

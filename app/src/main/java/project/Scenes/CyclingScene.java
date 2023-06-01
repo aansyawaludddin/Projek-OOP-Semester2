@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -26,7 +27,16 @@ public class CyclingScene {
 
     public void show() {
 
-    Text tTitle = new Text("Perhitungan Kalori Olahraga Sepeda");
+        StackPane spLayout = new StackPane();
+        Scene scene = new Scene(spLayout, 640, 640);
+
+        // Setting background
+        ImageView ivBackground = new ImageView("/images/sepeda.jpg");
+        ivBackground.setFitWidth(scene.getWidth());
+        ivBackground.setFitHeight(scene.getHeight());
+        spLayout.getChildren().add(ivBackground);
+
+        Text tTitle = new Text("Perhitungan Kalori Olahraga Sepeda");
         Label lName = new Label("Masukkan Nama");
         TextField tName = new TextField();
         Label lDuration = new Label("Durasi Bersepeda");
@@ -37,8 +47,7 @@ public class CyclingScene {
         Label lResults = new Label();
         Label lRecommendedCalories = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate,
-                lResults, lRecommendedCalories, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, lRecommendedCalories, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -50,7 +59,7 @@ public class CyclingScene {
         bCalculate.getStyleClass().add("bCalculate");
         bBack.getStyleClass().add("back");
 
-        // Action untuk Button
+        //Action untuk Button
         bBack.setOnAction(v -> {
             MainScene MainScene = new MainScene(stage);
             MainScene.show();
@@ -72,9 +81,9 @@ public class CyclingScene {
                 double recommendedCalories = caloriesBurned * 1.2;
                 lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
 
-                exerciseRecords
-                        .add(new Result(name, "Cycling", duration, distance, caloriesBurned, recommendedCalories));
 
+                exerciseRecords.add(new Result(name, "Cycling", duration, distance, caloriesBurned, recommendedCalories));
+                
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
             }
@@ -88,7 +97,7 @@ public class CyclingScene {
         TableColumn<Result, Double> distanceColumn = new TableColumn<>("Distance");
         TableColumn<Result, Double> caloriColumn = new TableColumn<>("Calori");
         TableColumn<Result, Double> recommendCaloriColumn = new TableColumn<>("Recommend Calori");
-
+        
         // Set value factories for columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         sportColumn.setCellValueFactory(new PropertyValueFactory<>("sport"));
@@ -98,8 +107,7 @@ public class CyclingScene {
         recommendCaloriColumn.setCellValueFactory(new PropertyValueFactory<>("recommed"));
 
         // Add columns to TableView
-        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn,
-                recommendCaloriColumn);
+        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn, recommendCaloriColumn);
 
         // Set number of visible columns
         int numberOfColumns = 6;
@@ -118,18 +126,15 @@ public class CyclingScene {
         distanceColumn.setPrefWidth(columnWidth);
         caloriColumn.setPrefWidth(columnWidth);
         recommendCaloriColumn.setPrefWidth(columnWidth);
-
+        
         // Add exercise records to the TableView
         tableView.setItems(exerciseRecords);
 
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults,
-                lRecommendedCalories, bBack, tableView);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, lRecommendedCalories, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
+        spLayout.getChildren().add(rootNode);
         rootNode.getStyleClass().add("inputan");
-        rootNode.getStyleClass().add("Bg");
-
-        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
         // atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());

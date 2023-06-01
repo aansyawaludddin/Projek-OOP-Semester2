@@ -13,14 +13,13 @@ import javafx.stage.Stage;
 
 public class MainScene {
     private Stage stage;
-    private VBox rightSide;
 
     public MainScene(Stage stage) {
         this.stage = stage;
     }
     public void show() {
 
-    Text tTitle = new Text("PILIH MENU OLAHRAGA");
+        Text tTitle = new Text("PILIH MENU OLAHRAGA");
         Button bOlahraga1 = new Button("RUNNING");
         Button bOlahraga2 = new Button("CYCLING");
         Button bOlahraga3 = new Button("SWIMMING");
@@ -54,13 +53,14 @@ public class MainScene {
 
         // Action untuk Button
         bOlahraga1.setOnAction(v -> {
-            CyclingScene CyclingScene = new CyclingScene(stage);
-            CyclingScene.show();
+            RunningScene RunningScene = new RunningScene(stage);
+            RunningScene.show();
+            
         });
 
         bOlahraga2.setOnAction(v -> {
-            RunningScene RunningScene = new RunningScene(stage);
-            RunningScene.show();
+            CyclingScene CyclingScene = new CyclingScene(stage);
+            CyclingScene.show();
         });
 
         bOlahraga3.setOnAction(v -> {
@@ -68,7 +68,7 @@ public class MainScene {
             SwimingScene.show();
         });
 
-        // section
+        //section
         ImageView ivBanner1 = new ImageView("/images/lari.png");
         ivBanner1.setFitWidth(100);
         ivBanner1.setFitHeight(100);
@@ -84,7 +84,7 @@ public class MainScene {
         ivBanner3.setFitHeight(100);
         ivBanner3.setPreserveRatio(true);
 
-        // rootNode
+        //rootNode
         VBox rootNode = new VBox(sectionRight1, space, ivBanner1, sectionRight2, ivBanner2, sectionRight3, ivBanner3,
                 sectionRight4);
         rootNode.setAlignment(Pos.CENTER);
@@ -92,7 +92,7 @@ public class MainScene {
 
         Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
-        // atur css
+        //atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         stage.setScene(scene);
         

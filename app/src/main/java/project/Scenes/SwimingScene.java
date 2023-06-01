@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -26,7 +27,16 @@ public class SwimingScene {
 
     public void show() {
 
-    Text tTitle = new Text("Perhitungan Kalori Olahraga Renang");
+        StackPane spLayout = new StackPane();
+        Scene scene = new Scene(spLayout, 640, 640);
+
+        // Setting background
+        ImageView ivBackground = new ImageView("/images/renang.jpg");
+        ivBackground.setFitWidth(scene.getWidth());
+        ivBackground.setFitHeight(scene.getHeight());
+        spLayout.getChildren().add(ivBackground);
+
+        Text tTitle = new Text("Perhitungan Kalori Olahraga Renang");
         Label lName = new Label("Masukkan Nama");
         TextField tName = new TextField();
         Label lDuration = new Label("Durasi Berenang");
@@ -40,7 +50,7 @@ public class SwimingScene {
         Label lRecommendedCalories = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
         VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
-                bCalculate, lResults, lRecommendedCalories, bBack);
+                bCalculate, lResults,lRecommendedCalories, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -53,7 +63,7 @@ public class SwimingScene {
         bCalculate.getStyleClass().add("bCalculate");
         bBack.getStyleClass().add("back");
 
-        // Action untuk Button
+        //Action untuk Button
         bBack.setOnAction(v -> {
             MainScene MainScene = new MainScene(stage);
             MainScene.show();
@@ -76,9 +86,8 @@ public class SwimingScene {
                 double recommendedCalories = caloriesBurned * 1.2;
                 lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
 
-                exerciseRecords.add(
-                        new Result2(name, "Swimming", duration, style, intensity, caloriesBurned, recommendedCalories));
-
+                exerciseRecords.add(new Result2(name, "Swimming", duration, style, intensity, caloriesBurned, recommendedCalories));
+         
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
             }
@@ -104,9 +113,8 @@ public class SwimingScene {
         recommendCaloriColumn.setCellValueFactory(new PropertyValueFactory<>("recommendCalori"));
 
         // Add columns to TableView
-        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, styleColumn, intensityColumn,
-                caloriColumn, recommendCaloriColumn);
-
+        tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, styleColumn, intensityColumn, caloriColumn, recommendCaloriColumn);
+        
         // Set number of visible columns
         int numberOfColumns = 6;
 
@@ -124,19 +132,17 @@ public class SwimingScene {
         styleColumn.setPrefWidth(columnWidth);
         intensityColumn.setPrefWidth(columnWidth);
         caloriColumn.setPrefWidth(columnWidth);
-        recommendCaloriColumn.setPrefWidth(columnWidth);
+        recommendCaloriColumn.setPrefWidth(columnWidth);  
 
         // Add exercise records to the TableView
         tableView.setItems(exerciseRecords);
 
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
-                bCalculate, lResults, lRecommendedCalories, bBack, tableView);
+                bCalculate, lResults,lRecommendedCalories, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
+        spLayout.getChildren().add(rootNode);
         rootNode.getStyleClass().add("inputan");
-        rootNode.getStyleClass().add("Bg");
-
-        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
 
         // atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());

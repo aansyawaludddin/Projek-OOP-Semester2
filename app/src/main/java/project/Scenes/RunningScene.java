@@ -10,9 +10,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import project.models.Result;
@@ -26,7 +26,17 @@ public class RunningScene {
     }
 
     public void show() {
-    Text tTitle = new Text("Perhitungan Kalori Olahraga Lari");
+        
+        StackPane spLayout = new StackPane();
+        Scene scene = new Scene(spLayout, 640, 640);
+
+        // Setting background
+        ImageView ivBackground = new ImageView("/images/lari.jpg");
+        ivBackground.setFitWidth(scene.getWidth());
+        ivBackground.setFitHeight(scene.getHeight());
+        spLayout.getChildren().add(ivBackground);
+
+        Text tTitle = new Text("Perhitungan Kalori Olahraga Lari");
         Label lName = new Label("Masukkan Nama");
         TextField tName = new TextField();
         Label lDuration = new Label("Durasi Berlari");
@@ -37,8 +47,7 @@ public class RunningScene {
         Label lResults = new Label();
         Label lRecommendedCalories = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
-        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate,
-                lResults, lRecommendedCalories, bBack);
+        VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, lRecommendedCalories, bBack);
         sectionRight.setSpacing(50);
         sectionRight.setAlignment(Pos.CENTER);
         sectionRight.setPrefWidth(30);
@@ -50,8 +59,7 @@ public class RunningScene {
         bCalculate.getStyleClass().add("bCalculate");
         bBack.getStyleClass().add("back");
 
-        
-        // Action untuk Button
+        //Action untuk Button
         bBack.setOnAction(v -> {
             MainScene MainScene = new MainScene(stage);
             MainScene.show();
@@ -60,26 +68,25 @@ public class RunningScene {
         ObservableList<Result> exerciseRecords = FXCollections.observableArrayList();
 
         bCalculate.setOnAction(v -> {
-            try {
-                String name = tName.getText();
-                int duration = Integer.parseInt(tDuration.getText());
-                double distance = Double.parseDouble(tDistance.getText());
+        try {
+            String name = tName.getText();
+            int duration = Integer.parseInt(tDuration.getText());
+            double distance = Double.parseDouble(tDistance.getText());
 
-                Running running = new Running(name, duration, distance);
-                running.setCaloriePerKm();
-                double caloriesBurned = running.calculateCaloriesBurned();
+            Running running = new Running(name, duration, distance);
+            running.setCaloriePerKm();
+            double caloriesBurned = running.calculateCaloriesBurned();
+            
+            lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+            
+            double recommendedCalories = caloriesBurned * 1.2;
+            lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
 
-                lResults.setText("Kalori yang Dibakar: " + caloriesBurned);
+            exerciseRecords.add(new Result(name, "Running", duration, distance, caloriesBurned, recommendedCalories)); 
 
-                double recommendedCalories = caloriesBurned * 1.2;
-                lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
-
-                exerciseRecords
-                        .add(new Result(name, "Running", duration, distance, caloriesBurned, recommendedCalories));
-
-            } catch (NumberFormatException e) {
-                lResults.setText("Input tidak valid!");
-            }
+        } catch (NumberFormatException e) {
+            lResults.setText("Input tidak valid!");
+        }
         });
 
         // Create TableView and columns
@@ -122,17 +129,14 @@ public class RunningScene {
 
         // Add exercise records to the TableView
         tableView.setItems(exerciseRecords);
-
+        
         // rootNode
-        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults,
-                lRecommendedCalories, bBack, tableView);
+        VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance,bCalculate,lResults, lRecommendedCalories, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
+        spLayout.getChildren().add(rootNode);
         rootNode.getStyleClass().add("inputan");
-        rootNode.getStyleClass().add("Bg");
 
-        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
-
-        // atur css
+        //atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());
         stage.setScene(scene);
 
