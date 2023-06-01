@@ -320,6 +320,7 @@ public class App extends Application {
                 double recommendedCalories = caloriesBurned * 1.2;
                 lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
 
+
                 exerciseRecords.add(new Result(name, "Cycling", duration, distance, caloriesBurned, recommendedCalories));
                 
             } catch (NumberFormatException e) {
@@ -342,7 +343,7 @@ public class App extends Application {
         durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
         distanceColumn.setCellValueFactory(new PropertyValueFactory<>("distance"));
         caloriColumn.setCellValueFactory(new PropertyValueFactory<>("calori"));
-        recommendCaloriColumn.setCellValueFactory(new PropertyValueFactory<>("recommend"));
+        recommendCaloriColumn.setCellValueFactory(new PropertyValueFactory<>("recommed"));
 
         // Add columns to TableView
         tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, distanceColumn, caloriColumn, recommendCaloriColumn);
