@@ -284,7 +284,7 @@ public class App extends Application {
         Label lDistance = new Label("Jarak Tempuh");
         TextField tDistance = new TextField("");
         Button bCalculate = new Button("Calculate Calori");
-        Label lResults = new Label("");
+        Label lResults = new Label();
         Label lRecommendedCalories = new Label();
         Button bBack = new Button("Kembali Halaman Utama");
         VBox sectionRight = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, lRecommendedCalories, bBack);
@@ -432,7 +432,7 @@ public class App extends Application {
                 double recommendedCalories = caloriesBurned * 1.2;
                 lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
 
-                exerciseRecords.add(new Result2(name, "Swimming", duration, style, intensity, caloriesBurned));
+                exerciseRecords.add(new Result2(name, "Swimming", duration, style, intensity, caloriesBurned, recommendedCalories));
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
             }
@@ -446,6 +446,7 @@ public class App extends Application {
         TableColumn<Result2, String> styleColumn = new TableColumn<>("Style");
         TableColumn<Result2, String> intensityColumn = new TableColumn<>("Intensity");
         TableColumn<Result2, Double> caloriColumn = new TableColumn<>("Calori");
+        TableColumn<Result2, Double> rCaloriColumn = new TableColumn<>("Recommend Calori");
 
         // Set value factories for columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -454,13 +455,14 @@ public class App extends Application {
         styleColumn.setCellValueFactory(new PropertyValueFactory<>("style"));
         intensityColumn.setCellValueFactory(new PropertyValueFactory<>("intensity"));
         caloriColumn.setCellValueFactory(new PropertyValueFactory<>("calori"));
+        rCaloriColumn.setCellValueFactory(new PropertyValueFactory<>("rCalori"));
 
         // Add columns to TableView
         tableView.getColumns().addAll(nameColumn, sportColumn, durationColumn, styleColumn, intensityColumn,
-                caloriColumn);
+                caloriColumn, rCaloriColumn);
         
         // Set number of visible columns
-        int numberOfColumns = 5;
+        int numberOfColumns = 6;
 
         // Set column resize policy
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -475,14 +477,15 @@ public class App extends Application {
         durationColumn.setPrefWidth(columnWidth);
         styleColumn.setPrefWidth(columnWidth);
         intensityColumn.setPrefWidth(columnWidth);
-        caloriColumn.setPrefWidth(columnWidth);        
+        caloriColumn.setPrefWidth(columnWidth);
+        rCaloriColumn.setPrefWidth(columnWidth);  
 
         // Add exercise records to the TableView
         tableView.setItems(exerciseRecords);
 
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
-                bCalculate, lResults, bBack, tableView);
+                bCalculate, lResults,lRecommendedCalories, bBack, tableView);
         rootNode.setAlignment(Pos.TOP_CENTER);
         rootNode.getStyleClass().add("inputan");
         rootNode.getStyleClass().add("Bg");

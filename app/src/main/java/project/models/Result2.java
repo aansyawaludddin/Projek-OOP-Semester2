@@ -7,14 +7,16 @@ public class Result2 {
     private String style;
     private String intensity;
     private double calori;
+    private double rCalori;
     
-    public Result2(String name, String sport, double duration, String style, String intensity, double calori) {
+    public Result2(String name, String sport, double duration, String style, String intensity, double calori, double rCalori) {
         this.name = name;
         this.sport = sport;
         this.duration = duration;
         this.style = style;
         this.intensity = intensity;
         this.calori = calori;
+        this.rCalori = rCalori;
     }
     public String getName() {
         return name;
@@ -51,5 +53,11 @@ public class Result2 {
     }
     public void setCalori(double calori) {
         this.calori = calori;
+    }
+    public double getrCalori() {
+        return rCalori;
+    }
+    public void setrCalori(double rCalori) {
+        this.rCalori = rCalori;
     }
 }
