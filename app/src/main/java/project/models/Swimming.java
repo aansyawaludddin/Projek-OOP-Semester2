@@ -3,15 +3,13 @@ package project.models;
 public class Swimming extends Sport {
     private String style;
     private String intensity;
+    private double caloriePerKm;
 
     public Swimming(String name, int duration, String style, String intensity) {
         super(name, duration);
         this.style = style;
         this.intensity = intensity;
-    }
 
-    @Override
-    public double calculateCaloriesBurned() {
         double calories = 0.0;
         // Pengondisian berdasarkan gaya berenang dan intensitasnya
         if (style.equalsIgnoreCase("bebas")) {
@@ -37,12 +35,18 @@ public class Swimming extends Sport {
                 calories = 600.0;
             } else if (intensity.equalsIgnoreCase("tinggi")) {
                 calories = 750.0;
-        }
+            }
         } else {
             calories = 0.0; // Default jika gaya renang atau intensitas tidak sesuai
         }
 
-        return calories ;
-}
+        double durationHours = duration / 60;
+        caloriePerKm = calories * durationHours;
 
+    }
+
+    @Override
+    public double calculateCaloriesBurned() {
+        return caloriePerKm * (getDuration() / 60.0);
+    }
 }
