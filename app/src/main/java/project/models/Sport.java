@@ -19,7 +19,7 @@ abstract class Sport {
     }
 
     public int getDuration() {
-        return duration/60;
+        return duration;
     }
 
     public void setDuration(int duration) {
