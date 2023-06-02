@@ -1,26 +1,30 @@
 .title-text-left {
-  -fx-fill: "#79E0EE";
-  -fx-font-size: 33px;
-  -fx-font-weight: bold;
+	-fx-fill: "#79E0EE";
+  -fx-font-family: "montserrat";
+	-fx-font-size: 33px;
+	-fx-font-weight: bold;
 }
 
 .title-text-right {
-  -fx-fill: pink;
-  -fx-font-size: 33px;
-  -fx-font-weight: bold;
+  -fx-fill: "#FFFFFF";
+  -fx-font-family: "montserrat";
+	-fx-font-size: 33px;
+	-fx-font-weight: bold;
 }
 
 .desc-text {
-  -fx-text-fill: black;
-  -fx-font-size: 14px;
+  -fx-text-fill: rgb(255, 255, 255);
+  -fx-font-family: "montserrat";
+  -fx-font-size: 16px;
 }
 
 .btn-explore {
-  -fx-background-color: red;
+  -fx-background-color: #79E0EE;
   -fx-text-fill: "#323232";
   -fx-font-size: 15px;
   -fx-font-weight: bold;
-  -fx-min-width: 171px;
-  -fx-min-height: 38px;
+  -fx-min-width: 169px; 
+  -fx-min-height: 38px; 
   -fx-background-radius: 42px;
 }
+

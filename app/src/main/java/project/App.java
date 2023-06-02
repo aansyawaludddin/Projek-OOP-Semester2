@@ -1,12 +1,14 @@
 package project;
 
+import java.io.FileNotFoundException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import project.Scenes.HomeScene;
 
 public class App extends Application {
 
-    public void start(Stage stage) {
+    public void start(Stage stage) throws FileNotFoundException {
         // stage
         HomeScene homeScene = new HomeScene(stage);
         homeScene.show();
