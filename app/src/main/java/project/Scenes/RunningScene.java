@@ -1,5 +1,7 @@
 package project.Scenes;
 
+import java.sql.SQLException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -15,11 +17,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import project.dao.resultDao;
 import project.models.Result;
 import project.models.Running;
 
 public class RunningScene {
     private Stage stage;
+    ObservableList<Result> exerciseRecords = FXCollections.observableArrayList();
 
     public RunningScene(Stage stage) {
         this.stage = stage;
@@ -39,9 +43,9 @@ public class RunningScene {
         Text tTitle = new Text("Perhitungan Kalori Olahraga Lari");
         Label lName = new Label("Masukkan Nama");
         TextField tName = new TextField();
-        Label lDuration = new Label("Durasi Berlari");
+        Label lDuration = new Label("Durasi Berlari(Menit)");
         TextField tDuration = new TextField();
-        Label lDistance = new Label("Jarak Berlari");
+        Label lDistance = new Label("Jarak Berlari(KM)");
         TextField tDistance = new TextField();
         Button bCalculate = new Button("Calculate Calori");
         Label lResults = new Label();
@@ -59,13 +63,24 @@ public class RunningScene {
         bCalculate.getStyleClass().add("bCalculate");
         bBack.getStyleClass().add("back");
 
-        //Action untuk Button
-        bBack.setOnAction(v -> {
+        // ambil data dari database
+        resultDao resultDao = new resultDao();
+        try {
+            exerciseRecords.clear();
+            exerciseRecords.addAll(resultDao.getAll());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+           //Action untuk Button
+           bBack.setOnAction(v -> {
+            resultDao.syncData(exerciseRecords);
             MainScene MainScene = new MainScene(stage);
+            
             MainScene.show();
         });
 
-        ObservableList<Result> exerciseRecords = FXCollections.observableArrayList();
+
 
         bCalculate.setOnAction(v -> {
             try {

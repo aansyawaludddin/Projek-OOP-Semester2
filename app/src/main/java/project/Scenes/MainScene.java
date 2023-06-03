@@ -51,6 +51,7 @@ public class MainScene {
         sectionRight4.setAlignment(Pos.CENTER);
         sectionRight4.setPrefWidth(70);
 
+
         // Action untuk Button
         bOlahraga1.setOnAction(v -> {
             RunningScene RunningScene = new RunningScene(stage);
@@ -90,7 +91,7 @@ public class MainScene {
         rootNode.setAlignment(Pos.CENTER);
         rootNode.getStyleClass().add("Bg");
 
-        Scene scene = new Scene(new StackPane(rootNode), 640, 640);
+        Scene scene = new Scene(new StackPane(rootNode), 640, 480);
 
         //atur css
         scene.getStylesheets().add(getClass().getResource("/styles/main.css").toExternalForm());

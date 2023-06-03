@@ -1,5 +1,7 @@
 package project.Scenes;
 
+import java.sql.SQLException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -15,11 +17,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import project.dao.resultDao2;
 import project.models.Cycling;
-import project.models.Result;
+import project.models.Result2;
 
 public class CyclingScene {
     private Stage stage;
+    ObservableList<Result2> exerciseRecords2 = FXCollections.observableArrayList();
 
     public CyclingScene(Stage stage) {
         this.stage = stage;
@@ -59,13 +63,22 @@ public class CyclingScene {
         bCalculate.getStyleClass().add("bCalculate");
         bBack.getStyleClass().add("back");
 
+        // ambil data dari database
+        resultDao2 resultDao2 = new resultDao2();
+        try {
+            exerciseRecords2.clear();
+            exerciseRecords2.addAll(resultDao2.getAll());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         //Action untuk Button
         bBack.setOnAction(v -> {
+            resultDao2.syncData(exerciseRecords2);
             MainScene MainScene = new MainScene(stage);
             MainScene.show();
         });
 
-        ObservableList<Result> exerciseRecords = FXCollections.observableArrayList();
 
         bCalculate.setOnAction(v -> {
             try {
@@ -82,7 +95,7 @@ public class CyclingScene {
                 lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
 
 
-                exerciseRecords.add(new Result(name, "Cycling", duration, distance, caloriesBurned, recommendedCalories));
+                exerciseRecords2.add(new Result2(name, "Cycling", duration, distance, caloriesBurned, recommendedCalories));
                 
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
@@ -90,13 +103,13 @@ public class CyclingScene {
         });
 
         // Create TableView and columns
-        TableView<Result> tableView = new TableView<>();
-        TableColumn<Result, String> nameColumn = new TableColumn<>("Nama");
-        TableColumn<Result, String> sportColumn = new TableColumn<>("Olahraga");
-        TableColumn<Result, Double> durationColumn = new TableColumn<>("Durasi");
-        TableColumn<Result, Double> distanceColumn = new TableColumn<>("Distance");
-        TableColumn<Result, Double> caloriColumn = new TableColumn<>("Calori");
-        TableColumn<Result, Double> recommendCaloriColumn = new TableColumn<>("Recommend Calori");
+        TableView<Result2> tableView = new TableView<>();
+        TableColumn<Result2, String> nameColumn = new TableColumn<>("Nama");
+        TableColumn<Result2, String> sportColumn = new TableColumn<>("Olahraga");
+        TableColumn<Result2, Double> durationColumn = new TableColumn<>("Durasi");
+        TableColumn<Result2, Double> distanceColumn = new TableColumn<>("Distance");
+        TableColumn<Result2, Double> caloriColumn = new TableColumn<>("Calori");
+        TableColumn<Result2, Double> recommendCaloriColumn = new TableColumn<>("Recommend Calori");
         
         // Set value factories for columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -128,7 +141,7 @@ public class CyclingScene {
         recommendCaloriColumn.setPrefWidth(columnWidth);
         
         // Add exercise records to the TableView
-        tableView.setItems(exerciseRecords);
+        tableView.setItems(exerciseRecords2);
 
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lDistance, tDistance, bCalculate, lResults, lRecommendedCalories, bBack, tableView);

@@ -4,21 +4,19 @@ public class Result2 {
     private String name;
     private String sport;
     private double duration;
-    private String style;
-    private String intensity;
+    private double distance;
     private double calori;
-    private double recommendCalori;
+    private double recommed;
 
-    public Result2(String name, String sport, double duration, String style, String intensity, double calori, double recommendCalori) {
+    public Result2(String name, String sport, double duration, double distance, double calori, double recommed) {
         this.name = name;
         this.sport = sport;
         this.duration = duration;
-        this.style = style;
-        this.intensity = intensity;
+        this.distance = distance;
         this.calori = calori;
-        this.recommendCalori = recommendCalori;
+        this.recommed = recommed;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -35,28 +33,20 @@ public class Result2 {
         this.sport = sport;
     }
 
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     public double getDuration() {
         return duration;
     }
 
     public void setDuration(double duration) {
         this.duration = duration;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getIntensity() {
-        return intensity;
-    }
-
-    public void setIntensity(String intensity) {
-        this.intensity = intensity;
     }
 
     public double getCalori() {
@@ -67,12 +57,11 @@ public class Result2 {
         this.calori = calori;
     }
 
-    public double getRecommendCalori() {
-        return recommendCalori;
+    public double getRecommed() {
+        return recommed;
     }
 
-    public void setRecommendCalori(double recommendCalori) {
-        this.recommendCalori = recommendCalori;
+    public void setRecommedCalori(double recommed) {
+        this.recommed = recommed;
     }
-
 }

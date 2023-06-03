@@ -1,5 +1,7 @@
 package project.Scenes;
 
+import java.sql.SQLException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -15,11 +17,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import project.models.Result2;
+import project.dao.resultDao3;
+import project.models.Result3;
 import project.models.Swimming;
 
 public class SwimingScene {
     private Stage stage;
+    ObservableList<Result3> exerciseRecords3 = FXCollections.observableArrayList();
+
 
     public SwimingScene(Stage stage) {
         this.stage = stage;
@@ -63,13 +68,21 @@ public class SwimingScene {
         bCalculate.getStyleClass().add("bCalculate");
         bBack.getStyleClass().add("back");
 
+        // mbil data dari database
+        resultDao3 resultDao3 = new resultDao3();
+        try {
+            exerciseRecords3.clear();
+            exerciseRecords3.addAll(resultDao3.getAll());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         //Action untuk Button
         bBack.setOnAction(v -> {
+            resultDao3.syncData(exerciseRecords3);
             MainScene MainScene = new MainScene(stage);
             MainScene.show();
         });
-
-        ObservableList<Result2> exerciseRecords = FXCollections.observableArrayList();
 
         bCalculate.setOnAction(v -> {
             try {
@@ -86,7 +99,8 @@ public class SwimingScene {
                 double recommendedCalories = caloriesBurned * 1.2;
                 lRecommendedCalories.setText("Asupan Kalori yang Direkomendasikan: " + recommendedCalories + " kkal");
 
-                exerciseRecords.add(new Result2(name, "Swimming", duration, style, intensity, caloriesBurned, recommendedCalories));
+                exerciseRecords3.add(new Result3(name, "Swimming", duration, style, intensity, caloriesBurned, recommendedCalories));
+                
          
             } catch (NumberFormatException e) {
                 lResults.setText("Input tidak valid!");
@@ -94,14 +108,14 @@ public class SwimingScene {
         });
 
         // Create TableView and columns
-        TableView<Result2> tableView = new TableView<>();
-        TableColumn<Result2, String> nameColumn = new TableColumn<>("Nama");
-        TableColumn<Result2, String> sportColumn = new TableColumn<>("Olahraga");
-        TableColumn<Result2, Double> durationColumn = new TableColumn<>("Durasi");
-        TableColumn<Result2, String> styleColumn = new TableColumn<>("Style");
-        TableColumn<Result2, String> intensityColumn = new TableColumn<>("Intensity");
-        TableColumn<Result2, Double> caloriColumn = new TableColumn<>("Calori");
-        TableColumn<Result2, Double> recommendCaloriColumn = new TableColumn<>("Recommend Calori");
+        TableView<Result3> tableView = new TableView<>();
+        TableColumn<Result3, String> nameColumn = new TableColumn<>("Nama");
+        TableColumn<Result3, String> sportColumn = new TableColumn<>("Olahraga");
+        TableColumn<Result3, Double> durationColumn = new TableColumn<>("Durasi");
+        TableColumn<Result3, String> styleColumn = new TableColumn<>("Style");
+        TableColumn<Result3, String> intensityColumn = new TableColumn<>("Intensity");
+        TableColumn<Result3, Double> caloriColumn = new TableColumn<>("Calori");
+        TableColumn<Result3, Double> recommendCaloriColumn = new TableColumn<>("Recommend Calori");
 
         // Set value factories for columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -135,7 +149,7 @@ public class SwimingScene {
         recommendCaloriColumn.setPrefWidth(columnWidth);  
 
         // Add exercise records to the TableView
-        tableView.setItems(exerciseRecords);
+        tableView.setItems(exerciseRecords3);
 
         // rootNode
         VBox rootNode = new VBox(tTitle, lName, tName, lDuration, tDuration, lGaya, tGaya, lIntensitas, tIntensitas,
