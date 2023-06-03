@@ -66,8 +66,8 @@ public class resultDao3 {
             stmt = conn.createStatement();
             for (Result3 result : exerciseRecords3) {
                 String sql = String.format("""
-                        INSERT INTO exerciseRecords3(name, sport, duration, style,intensity, calori, recommed)
-                        VALUES('%s', '%s', %f, %s, %s, %f, %f);
+                        INSERT INTO exerciseRecords3(name, sport, duration, style,intensity, calori, recommendCalori)
+                        VALUES('%s', '%s', %f, '%s', '%s', %f, %f);
                         """,
                         result.getName(),
                         result.getSport(),
