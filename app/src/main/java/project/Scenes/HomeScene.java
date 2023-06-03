@@ -48,7 +48,7 @@ public class HomeScene {
 
         // Text deskripsi
         Label lDesk = new Label(
-                "Anda dapat memantau \nasupan kalori Anda \ndengan cepat dan akurat");
+                "Hitunglah kalori yang Anda bakar \ndengan aplikasi kami yang praktis \ndan akurat untuk olahraga!");
         lDesk.getStyleClass().add("desc-text");
         lDesk.setWrapText(true);
         lDesk.setMaxWidth(355);
